@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ProfileViewController.swift
 //  Instasham
 //
 //  Created by Jeanne Luning Prak on 6/20/16.
@@ -10,9 +10,10 @@ import UIKit
 import Parse
 import MBProgressHUD
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
-
-   
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var loadingMoreView:InfiniteScrollActivityView?
     
@@ -21,7 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var queryLimitUnit = 20
     var queryLimit = 20
     var sendingFromPost = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +33,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         tableView.dataSource = self
         tableView.delegate = self
         self.getPostsFromParse(nil)
+        
+        self.username.text = PFUser.currentUser()!.username
+        username.sizeToFit()
         
         let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
         loadingMoreView = InfiniteScrollActivityView(frame: frame)
@@ -58,6 +62,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let query = PFQuery(className: "Post")
         query.orderByDescending("createdAt")
         query.includeKey("author")
+        query.whereKey("author", equalTo: PFUser.currentUser()!)
         query.limit = queryLimit
         
         var postCount = 0
@@ -85,7 +90,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    func logout() {
+
+    @IBAction func logOut(sender: AnyObject) {
         PFUser.logOutInBackgroundWithBlock { (error: NSError?) in
             if let error = error {
                 print("Failed to log out")
@@ -121,9 +127,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     func goToLoginScreen() {
+            //reload application data (renew root view )
+        UIApplication.sharedApplication().keyWindow?.rootViewController = storyboard!.instantiateViewControllerWithIdentifier("loginScreen")
         print("Should go to login screen")
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -135,17 +143,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myPostCell", forIndexPath: indexPath) as! MyPostCell
         cell.setPost(postArray[indexPath.row])
         cell.loadUI()
         cell.tag = indexPath.row
         return cell
     }
-/*
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("toDetails", sender: indexPath.row)
-    }
- */
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "toDetails") {
@@ -153,6 +157,5 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             nextView.post = postArray[sender!.tag]
         }
     }
-
+    
 }
-

@@ -7,14 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B24412D6BE437C8D6922FEA8 /* Pods_Instasham.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9433BE70C55CB968419D6618 /* Pods_Instasham.framework */; };
+		DD1DABCB1D18E114001A3CA1 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DABCA1D18E114001A3CA1 /* PostCell.swift */; };
+		DD1DABCF1D199819001A3CA1 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DABCE1D199819001A3CA1 /* InfiniteScrollActivityView.swift */; };
+		DD4796BF1D19A8C7006F7608 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */; };
+		DD720F6B1D19E79600035596 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD720F6A1D19E79600035596 /* ProfileViewController.swift */; };
+		DD720F6D1D19E7D100035596 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD720F6C1D19E7D100035596 /* MyPostCell.swift */; };
 		DD8D70051D186394003EA9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70041D186394003EA9C4 /* AppDelegate.swift */; };
 		DD8D70071D186394003EA9C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70061D186394003EA9C4 /* ViewController.swift */; };
 		DD8D700A1D186394003EA9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D70081D186394003EA9C4 /* Main.storyboard */; };
 		DD8D700C1D186394003EA9C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD8D700B1D186394003EA9C4 /* Assets.xcassets */; };
 		DD8D700F1D186394003EA9C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D700D1D186394003EA9C4 /* LaunchScreen.storyboard */; };
+		DD8D701F1D186762003EA9C4 /* InstaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D701E1D186762003EA9C4 /* InstaPost.swift */; };
+		DD8D70251D189238003EA9C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70241D189238003EA9C4 /* LoginViewController.swift */; };
+		DD8D70271D18A7F2003EA9C4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46F90060047165E4B9B2852A /* Pods-Instasham.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instasham.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instasham/Pods-Instasham.debug.xcconfig"; sourceTree = "<group>"; };
+		9433BE70C55CB968419D6618 /* Pods_Instasham.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instasham.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B269AAE37E5B9020317C70BD /* Pods-Instasham.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instasham.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instasham/Pods-Instasham.release.xcconfig"; sourceTree = "<group>"; };
+		DD1DABCA1D18E114001A3CA1 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		DD1DABCE1D199819001A3CA1 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfiniteScrollActivityView.swift; path = ../Pods/InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
+		DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		DD720F6A1D19E79600035596 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DD720F6C1D19E7D100035596 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostCell.swift; sourceTree = "<group>"; };
 		DD8D70011D186394003EA9C4 /* Instasham.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instasham.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8D70041D186394003EA9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD8D70061D186394003EA9C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +39,9 @@
 		DD8D700B1D186394003EA9C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD8D700E1D186394003EA9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD8D70101D186394003EA9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD8D701E1D186762003EA9C4 /* InstaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstaPost.swift; path = ../InstaPost.swift; sourceTree = "<group>"; };
+		DD8D70241D189238003EA9C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +49,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24412D6BE437C8D6922FEA8 /* Pods_Instasham.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E7EDABD2B63CB9CB9A39940 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9433BE70C55CB968419D6618 /* Pods_Instasham.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAAF730885DC4D3E148DE296 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				46F90060047165E4B9B2852A /* Pods-Instasham.debug.xcconfig */,
+				B269AAE37E5B9020317C70BD /* Pods-Instasham.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DD8D6FF81D186394003EA9C4 = {
 			isa = PBXGroup;
 			children = (
 				DD8D70031D186394003EA9C4 /* Instasham */,
 				DD8D70021D186394003EA9C4 /* Products */,
+				CAAF730885DC4D3E148DE296 /* Pods */,
+				2E7EDABD2B63CB9CB9A39940 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +94,38 @@
 		DD8D70031D186394003EA9C4 /* Instasham */ = {
 			isa = PBXGroup;
 			children = (
+				DD8D70211D18682A003EA9C4 /* ViewControllers */,
+				DD8D70201D18681C003EA9C4 /* Views */,
 				DD8D70041D186394003EA9C4 /* AppDelegate.swift */,
-				DD8D70061D186394003EA9C4 /* ViewController.swift */,
+				DD8D701E1D186762003EA9C4 /* InstaPost.swift */,
 				DD8D70081D186394003EA9C4 /* Main.storyboard */,
 				DD8D700B1D186394003EA9C4 /* Assets.xcassets */,
 				DD8D700D1D186394003EA9C4 /* LaunchScreen.storyboard */,
 				DD8D70101D186394003EA9C4 /* Info.plist */,
 			);
 			path = Instasham;
+			sourceTree = "<group>";
+		};
+		DD8D70201D18681C003EA9C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD1DABCE1D199819001A3CA1 /* InfiniteScrollActivityView.swift */,
+				DD720F6C1D19E7D100035596 /* MyPostCell.swift */,
+				DD1DABCA1D18E114001A3CA1 /* PostCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		DD8D70211D18682A003EA9C4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD8D70061D186394003EA9C4 /* ViewController.swift */,
+				DD8D70241D189238003EA9C4 /* LoginViewController.swift */,
+				DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */,
+				DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */,
+				DD720F6A1D19E79600035596 /* ProfileViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +135,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD8D70131D186394003EA9C4 /* Build configuration list for PBXNativeTarget "Instasham" */;
 			buildPhases = (
+				8AE0BF09E8D6221CAFD275ED /* [CP] Check Pods Manifest.lock */,
 				DD8D6FFD1D186394003EA9C4 /* Sources */,
 				DD8D6FFE1D186394003EA9C4 /* Frameworks */,
 				DD8D6FFF1D186394003EA9C4 /* Resources */,
+				FF5F0965A3D1FB81EBC81FC4 /* [CP] Embed Pods Frameworks */,
+				13AD3F9548D73E3C5C081B39 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -96,6 +163,7 @@
 				TargetAttributes = {
 					DD8D70001D186394003EA9C4 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 4373C9X8BA;
 					};
 				};
 			};
@@ -130,13 +198,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		13AD3F9548D73E3C5C081B39 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Instasham/Pods-Instasham-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8AE0BF09E8D6221CAFD275ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FF5F0965A3D1FB81EBC81FC4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Instasham/Pods-Instasham-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DD8D6FFD1D186394003EA9C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1DABCB1D18E114001A3CA1 /* PostCell.swift in Sources */,
+				DD1DABCF1D199819001A3CA1 /* InfiniteScrollActivityView.swift in Sources */,
+				DD8D70271D18A7F2003EA9C4 /* PostViewController.swift in Sources */,
+				DD4796BF1D19A8C7006F7608 /* DetailsViewController.swift in Sources */,
 				DD8D70071D186394003EA9C4 /* ViewController.swift in Sources */,
+				DD720F6D1D19E7D100035596 /* MyPostCell.swift in Sources */,
 				DD8D70051D186394003EA9C4 /* AppDelegate.swift in Sources */,
+				DD720F6B1D19E79600035596 /* ProfileViewController.swift in Sources */,
+				DD8D70251D189238003EA9C4 /* LoginViewController.swift in Sources */,
+				DD8D701F1D186762003EA9C4 /* InstaPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,23 +371,31 @@
 		};
 		DD8D70141D186394003EA9C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46F90060047165E4B9B2852A /* Pods-Instasham.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Instasham/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jeanne.Instasham;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		DD8D70151D186394003EA9C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B269AAE37E5B9020317C70BD /* Pods-Instasham.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Instasham/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jeanne.Instasham;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -286,6 +418,7 @@
 				DD8D70151D186394003EA9C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
