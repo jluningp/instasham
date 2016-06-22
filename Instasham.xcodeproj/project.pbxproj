@@ -13,6 +13,11 @@
 		DD4796BF1D19A8C7006F7608 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */; };
 		DD720F6B1D19E79600035596 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD720F6A1D19E79600035596 /* ProfileViewController.swift */; };
 		DD720F6D1D19E7D100035596 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD720F6C1D19E7D100035596 /* MyPostCell.swift */; };
+		DD720F6F1D19FFA700035596 /* camera-48.png in Resources */ = {isa = PBXBuildFile; fileRef = DD720F6E1D19FFA700035596 /* camera-48.png */; };
+		DD720F711D1A008500035596 /* rsz_camera-48.png in Resources */ = {isa = PBXBuildFile; fileRef = DD720F701D1A008500035596 /* rsz_camera-48.png */; };
+		DD720F731D1A023400035596 /* homeicon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD720F721D1A023400035596 /* homeicon.png */; };
+		DD720F751D1A02AB00035596 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = DD720F741D1A02AB00035596 /* profile.png */; };
+		DD720F771D1A049300035596 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = DD720F761D1A049300035596 /* like.png */; };
 		DD8D70051D186394003EA9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70041D186394003EA9C4 /* AppDelegate.swift */; };
 		DD8D70071D186394003EA9C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70061D186394003EA9C4 /* ViewController.swift */; };
 		DD8D700A1D186394003EA9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D70081D186394003EA9C4 /* Main.storyboard */; };
@@ -21,6 +26,10 @@
 		DD8D701F1D186762003EA9C4 /* InstaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D701E1D186762003EA9C4 /* InstaPost.swift */; };
 		DD8D70251D189238003EA9C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70241D189238003EA9C4 /* LoginViewController.swift */; };
 		DD8D70271D18A7F2003EA9C4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */; };
+		DDCE04F81D1A43B0001603DE /* filledHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCE04F71D1A43B0001603DE /* filledHeart.png */; };
+		DDDC00561D1AF84E0096241B /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = DDDC00551D1AF84E0096241B /* comment.png */; };
+		DDDC00581D1AFAAF0096241B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC00571D1AFAAF0096241B /* CommentViewController.swift */; };
+		DDDC005A1D1B03CB0096241B /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC00591D1B03CB0096241B /* CommentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +41,11 @@
 		DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		DD720F6A1D19E79600035596 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DD720F6C1D19E7D100035596 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostCell.swift; sourceTree = "<group>"; };
+		DD720F6E1D19FFA700035596 /* camera-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-48.png"; path = "../../../Downloads/camera-48.png"; sourceTree = "<group>"; };
+		DD720F701D1A008500035596 /* rsz_camera-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rsz_camera-48.png"; path = "../../../Downloads/rsz_camera-48.png"; sourceTree = "<group>"; };
+		DD720F721D1A023400035596 /* homeicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = homeicon.png; path = ../../../Downloads/homeicon.png; sourceTree = "<group>"; };
+		DD720F741D1A02AB00035596 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = ../../../Downloads/profile.png; sourceTree = "<group>"; };
+		DD720F761D1A049300035596 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = like.png; path = ../../../Downloads/like.png; sourceTree = "<group>"; };
 		DD8D70011D186394003EA9C4 /* Instasham.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instasham.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8D70041D186394003EA9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD8D70061D186394003EA9C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +56,10 @@
 		DD8D701E1D186762003EA9C4 /* InstaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstaPost.swift; path = ../InstaPost.swift; sourceTree = "<group>"; };
 		DD8D70241D189238003EA9C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		DDCE04F71D1A43B0001603DE /* filledHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = filledHeart.png; path = ../../../Downloads/filledHeart.png; sourceTree = "<group>"; };
+		DDDC00551D1AF84E0096241B /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comment.png; path = ../../../Downloads/comment.png; sourceTree = "<group>"; };
+		DDDC00571D1AFAAF0096241B /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		DDDC00591D1B03CB0096241B /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +117,14 @@
 				DD8D70041D186394003EA9C4 /* AppDelegate.swift */,
 				DD8D701E1D186762003EA9C4 /* InstaPost.swift */,
 				DD8D70081D186394003EA9C4 /* Main.storyboard */,
+				DDDC00551D1AF84E0096241B /* comment.png */,
+				DDCE04F71D1A43B0001603DE /* filledHeart.png */,
+				DD720F761D1A049300035596 /* like.png */,
+				DD720F741D1A02AB00035596 /* profile.png */,
+				DD720F721D1A023400035596 /* homeicon.png */,
+				DD720F6E1D19FFA700035596 /* camera-48.png */,
 				DD8D700B1D186394003EA9C4 /* Assets.xcassets */,
+				DD720F701D1A008500035596 /* rsz_camera-48.png */,
 				DD8D700D1D186394003EA9C4 /* LaunchScreen.storyboard */,
 				DD8D70101D186394003EA9C4 /* Info.plist */,
 			);
@@ -110,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				DD1DABCE1D199819001A3CA1 /* InfiniteScrollActivityView.swift */,
+				DDDC00591D1B03CB0096241B /* CommentCell.swift */,
 				DD720F6C1D19E7D100035596 /* MyPostCell.swift */,
 				DD1DABCA1D18E114001A3CA1 /* PostCell.swift */,
 			);
@@ -120,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				DD8D70061D186394003EA9C4 /* ViewController.swift */,
+				DDDC00571D1AFAAF0096241B /* CommentViewController.swift */,
 				DD8D70241D189238003EA9C4 /* LoginViewController.swift */,
 				DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */,
 				DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */,
@@ -190,9 +217,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD720F771D1A049300035596 /* like.png in Resources */,
 				DD8D700F1D186394003EA9C4 /* LaunchScreen.storyboard in Resources */,
 				DD8D700C1D186394003EA9C4 /* Assets.xcassets in Resources */,
+				DD720F6F1D19FFA700035596 /* camera-48.png in Resources */,
+				DD720F731D1A023400035596 /* homeicon.png in Resources */,
 				DD8D700A1D186394003EA9C4 /* Main.storyboard in Resources */,
+				DD720F711D1A008500035596 /* rsz_camera-48.png in Resources */,
+				DDDC00561D1AF84E0096241B /* comment.png in Resources */,
+				DDCE04F81D1A43B0001603DE /* filledHeart.png in Resources */,
+				DD720F751D1A02AB00035596 /* profile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +295,8 @@
 				DD720F6B1D19E79600035596 /* ProfileViewController.swift in Sources */,
 				DD8D70251D189238003EA9C4 /* LoginViewController.swift in Sources */,
 				DD8D701F1D186762003EA9C4 /* InstaPost.swift in Sources */,
+				DDDC00581D1AFAAF0096241B /* CommentViewController.swift in Sources */,
+				DDDC005A1D1B03CB0096241B /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

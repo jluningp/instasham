@@ -43,6 +43,15 @@ class LoginViewController: UIViewController {
         performSegueWithIdentifier("toMainScreen", sender: nil)
     }
     
+    func keyboardWillShow(notification: NSNotification) {
+        print("keyboard shown")
+        let userInfo = notification.userInfo
+        let keyboardFrame = userInfo![UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
+        let keyboardHeight = keyboardFrame!.size.height
+        //buttonBottomConstraint.constant = keyboardHeight
+        view.layoutIfNeeded()
+    }
+    
    
     @IBAction func signUp(sender: AnyObject) {
         let newUser = PFUser()

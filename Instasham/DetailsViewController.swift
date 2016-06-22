@@ -25,9 +25,17 @@ class DetailsViewController: UIViewController {
             self.caption.text = post.caption
             caption.sizeToFit()
             caption.layoutIfNeeded()
-            self.timestamp.text = post.timestamp
+            self.timestamp.text = dateString(post.timestamp)
         }
         // Do any additional setup after loading the view.
+    }
+    
+    func dateString(date : NSDate) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .NoStyle
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        return dateFormatter.stringFromDate(date)
     }
 
     @IBAction func dismissView(sender: AnyObject) {

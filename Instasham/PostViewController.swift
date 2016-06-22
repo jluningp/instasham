@@ -51,7 +51,7 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        previewImage.image = originalImage
+        previewImage.image = editedImage
         
         // Do something with the images (based on your use case)
         

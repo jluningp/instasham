@@ -68,7 +68,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 postCount = posts.count
                 self.postArray.removeAll()
                 for i in 0..<postCount {
-                    self.postArray.append(InstaPost(photo: posts[i]["media"] as! PFFile, caption: posts[i]["caption"] as! String, postedBy: posts[i]["author"] as! PFUser, timeStamp: "\(posts[i].createdAt)"))
+                    self.postArray.append(InstaPost(photo: posts[i]["media"] as! PFFile, caption: posts[i]["caption"] as! String, postedBy: posts[i]["author"] as! PFUser, timeStamp: posts[i].createdAt, id: posts[i].objectId!, likes: posts[i]["likesCount"] as! Int, userLikes: posts[i]["likes"] as! [PFUser], comments: posts[i]["comments"] as! [String], userComments: posts[i]["userComments"] as! [PFUser]))
                 }
             } else {
                 print("Nothing was Sent from Server")
@@ -139,6 +139,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cell.setPost(postArray[indexPath.row])
         cell.loadUI()
         cell.tag = indexPath.row
+        cell.numComments.tag = indexPath.row
+        cell.makeComment.tag = indexPath.row
         return cell
     }
 /*
@@ -151,6 +153,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if(segue.identifier == "toDetails") {
             let nextView = segue.destinationViewController as! DetailsViewController
             nextView.post = postArray[sender!.tag]
+        } else if(segue.identifier == "toComments") {
+            let nextView = segue.destinationViewController as! CommentViewController
+            nextView.post = postArray[sender!.tag]
+
         }
     }
 

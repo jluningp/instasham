@@ -19,8 +19,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var stopIncrementingInfiniteScroll = false
     var postArray = [InstaPost]()
-    var queryLimitUnit = 20
-    var queryLimit = 20
+    var queryLimitUnit = 3
+    var queryLimit = 3
     var sendingFromPost = 0
     
     override func viewDidLoad() {
@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 postCount = posts.count
                 self.postArray.removeAll()
                 for i in 0..<postCount {
-                    self.postArray.append(InstaPost(photo: posts[i]["media"] as! PFFile, caption: posts[i]["caption"] as! String, postedBy: posts[i]["author"] as! PFUser, timeStamp: "\(posts[i].createdAt)"))
+                    self.postArray.append(InstaPost(photo: posts[i]["media"] as! PFFile, caption: posts[i]["caption"] as! String, postedBy: posts[i]["author"] as! PFUser, timeStamp: posts[i].createdAt, id: posts[i].objectId!, likes: posts[i]["likesCount"] as! Int, userLikes: posts[i]["likes"] as! [PFUser], comments: posts[i]["comments"] as! [String], userComments: posts[i]["userComments"] as! [PFUser]))
                 }
             } else {
                 print("Nothing was Sent from Server")
