@@ -19,6 +19,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.estimatedRowHeight = 375.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
     }
     @IBAction func postComment(sender: AnyObject) {

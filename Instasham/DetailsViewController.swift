@@ -14,7 +14,8 @@ class DetailsViewController: UIViewController {
     var post : InstaPost?
     @IBOutlet weak var photo: PFImageView!
     @IBOutlet weak var timestamp: UILabel!
-    @IBOutlet weak var caption: UILabel!
+    @IBOutlet weak var caption: UIButton!
+    @IBOutlet weak var username: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +23,9 @@ class DetailsViewController: UIViewController {
         if let post = post {
             self.photo.file = post.photo
             self.photo.loadInBackground()
-            self.caption.text = post.caption
-            caption.sizeToFit()
-            caption.layoutIfNeeded()
-            self.timestamp.text = dateString(post.timestamp)
+            self.caption.setTitle(post.caption, forState: .Normal)
+            self.timestamp.text = "Posted " + dateString(post.timestamp)
+            self.username.text = post.postedBy
         }
         // Do any additional setup after loading the view.
     }

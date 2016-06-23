@@ -1,43 +1,42 @@
 //
-//  ProfileViewController.swift
+//  OtherProfileViewController.swift
 //  Instasham
 //
-//  Created by Jeanne Luning Prak on 6/20/16.
+//  Created by Jeanne Luning Prak on 6/23/16.
 //  Copyright © 2016 Jeanne Luning Prak. All rights reserved.
 //
 
 import UIKit
 import Parse
-import ParseUI
 import MBProgressHUD
+import ParseUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource {
+class OtherProfileViewController: UIViewController, UICollectionViewDataSource {
+    
     
     @IBOutlet weak var postNumber: UILabel!
-    @IBOutlet weak var profilePic: PFImageView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var username: UILabel!
-    var loadingMoreView:InfiniteScrollActivityView?
-    
-    var stopIncrementingInfiniteScroll = false
     var postArray = [InstaPost]()
-    var queryLimitUnit = 3
-    var queryLimit = 3
-    var sendingFromPost = 0
+    var queryLimit = 20
+    let queryLimitUnit = 20
+    var stopIncrementingInfiniteScroll = false
+    var loadingMoreView:InfiniteScrollActivityView?
+    var user : PFUser?
+    @IBOutlet weak var profilePic: PFImageView!
+    @IBOutlet weak var topUsername: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.dataSource = self
+        
+        self.topUsername.text = user!.username!
+        
+        self.collectionView.dataSource = self
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
-        
-        collectionView.dataSource = self
-        self.getPostsFromParse(nil)
-        
-        self.username.text = PFUser.currentUser()!.username
-        username.sizeToFit()
-        
+      
         let frame = CGRectMake(0, collectionView.contentSize.height, collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
         loadingMoreView = InfiniteScrollActivityView(frame: frame)
         loadingMoreView!.hidden = true
@@ -46,27 +45,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         var insets = collectionView.contentInset;
         insets.bottom += InfiniteScrollActivityView.defaultHeight;
         collectionView.contentInset = insets
+        // Do any additional setup after loading the view.
         
         loadProfilePic()
-    }
-    
-    func circleProfile() {
-        profilePic.layer.masksToBounds = false
-        profilePic.layer.cornerRadius = profilePic.frame.size.height/2
-        profilePic.clipsToBounds = true
-    }
-    
-    func loadProfilePic() {
-        circleProfile()
-        print(PFUser.currentUser())
-        self.profilePic.file = PFUser.currentUser()!["profile"] as? PFFile
-        self.profilePic.loadInBackground()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        self.queryLimit = self.queryLimitUnit
-        self.getPostsFromParse(nil)
+        
+        getPostsFromParse(refreshControl)
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
@@ -108,77 +91,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    func circleProfile() {
+        profilePic.layer.masksToBounds = false
+        profilePic.layer.cornerRadius = profilePic.frame.size.height/2
+        profilePic.clipsToBounds = true
+    }
+    
+    func loadProfilePic() {
+        circleProfile()
+        self.profilePic.file = user!["profile"] as? PFFile
+        self.profilePic.loadInBackground()
+    }
+    
 
-    @IBAction func logOut(sender: AnyObject) {
-        PFUser.logOutInBackgroundWithBlock { (error: NSError?) in
-            if let error = error {
-                print("Failed to log out")
-            } else {
-                print("Logout Successful")
-                self.goToLoginScreen()
-            }
-        }
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (!stopIncrementingInfiniteScroll) {
-            // Calculate the position of one screen length before the bottom of the results
-            let scrollViewContentHeight = collectionView.contentSize.height
-            let scrollOffsetThreshold = scrollViewContentHeight - collectionView.bounds.size.height
-            
-            // When the user has scrolled past the threshold, start requesting
-            if(scrollView.contentOffset.y > scrollOffsetThreshold && collectionView.dragging) {
-                
-                stopIncrementingInfiniteScroll = true
-                
-                let frame = CGRectMake(0, collectionView.contentSize.height, collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
-                loadingMoreView?.frame = frame
-                loadingMoreView!.startAnimating()
-                
-                // Code to load more results
-                self.queryLimit += self.queryLimitUnit
-                print(self.queryLimit)
-                getPostsFromParse(nil)
-            }
-        }
-    }
-    
-    func imageFromLibrary(source : UIImagePickerControllerSourceType) {
-        let vc = UIImagePickerController()
-        vc.delegate = self
-        vc.allowsEditing = true
-        vc.sourceType = source
-        
-        self.presentViewController(vc, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        // Get the image captured by the UIImagePickerController
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        
-        InstaPost.updateProfilePic(editedImage)
-        
-        profilePic.image = editedImage
-
-        // Dismiss UIImagePickerController to go back to your original view controller
+    @IBAction func closeProfile(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
-    @IBAction func newProfilePic(sender: AnyObject) {
-        imageFromLibrary(UIImagePickerControllerSourceType.PhotoLibrary)
-    }
-    
-    
-    
-    func goToLoginScreen() {
-            //reload application data (renew root view )
-        UIApplication.sharedApplication().keyWindow?.rootViewController = storyboard!.instantiateViewControllerWithIdentifier("loginScreen")
-        print("Should go to login screen")
-    }
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -196,7 +126,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return cell
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "toDetails") {
             let nextView = segue.destinationViewController as! DetailsViewController
@@ -204,4 +133,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

@@ -19,24 +19,18 @@ class HeaderView: UITableViewCell {
         // Initialization code
     }
     
+    func circleHeader() {
+        headerImage.layer.masksToBounds = false
+        headerImage.layer.cornerRadius = headerImage.frame.size.height/2
+        headerImage.clipsToBounds = true
+    }
+    
     func loadUI(postedBy : PFUser, username : String) {
+        circleHeader()
         self.userName.text = username
-        let query = PFQuery(className:"Profile")
-        query.whereKey("user", equalTo: postedBy)
-        query.findObjectsInBackgroundWithBlock() {
-            (post, error) -> Void in
-            if error != nil {
-                print("error")
-            } else {
-                if let post = post {
-                    if(post.count == 0) {
-                        self.headerImage.image = UIImage(named: "defaultProfile")
-                    } else {
-                        self.headerImage.file = post[0]["pic"] as? PFFile
-                        self.headerImage.loadInBackground()
-                    }
-                }
-            }
+        if let profile = postedBy["profile"] {
+            self.headerImage.file = profile as? PFFile
+            self.headerImage.loadInBackground()
         }
     }
     

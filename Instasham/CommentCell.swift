@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class CommentCell: UITableViewCell {
 
-    
-    @IBOutlet weak var profilepic: UIImageView!
+    @IBOutlet weak var profilepic: PFImageView!
     @IBOutlet weak var comment: UILabel!
     @IBOutlet weak var username: UILabel!
     var currentComment : Comment?
@@ -27,6 +28,19 @@ class CommentCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func circleProfile() {
+        profilepic.layer.masksToBounds = false
+        profilepic.layer.cornerRadius = profilepic.frame.size.height/2
+        profilepic.clipsToBounds = true
+    }
+    
+    func loadProfilePic() {
+        circleProfile()
+        self.profilepic.file = self.currentComment!.user["profile"] as? PFFile
+        self.profilepic.loadInBackground()
+    }
+
+    
     func setComment(comment : Comment) {
         self.currentComment = comment
     }
@@ -41,6 +55,7 @@ class CommentCell: UITableViewCell {
         }
         username.text = user.username
         comment.text = self.currentComment!.comment
+        loadProfilePic()
     }
 
 }

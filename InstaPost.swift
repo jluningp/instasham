@@ -40,29 +40,10 @@ class InstaPost {
     }
     
     class func updateProfilePic(image: UIImage?) {
-        let query = PFQuery(className:"Profile")
-        query.whereKey("user", equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock() {
-            (post, error) -> Void in
-            if error != nil {
-                print("error")
-            } else {
-                if let post = post {
-                    if(post.count == 0) {
-                        let profile = PFObject(className: "Profile")
-                        profile["user"] = PFUser.currentUser()
-                        profile["pic"] = getPFFileFromImage(image)
-                        profile.saveInBackground()
-                    }
-                    let profile = post[0]
-                    profile["pic"] = getPFFileFromImage(image)
-                    profile.saveInBackground()
-                }
-            }
-        }
+        let user = PFUser.currentUser()
+        user!["profile"] = getPFFileFromImage(image)
+        user!.saveInBackground()
     }
-
-
 
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
         // check if image is not nil

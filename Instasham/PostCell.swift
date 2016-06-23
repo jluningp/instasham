@@ -63,7 +63,7 @@ class PostCell: UITableViewCell {
             } catch _ {
                 return "\(post!.likes) likes"
             }
-            var likedBy = "\u{2764} \(firstLike.username!)"
+            var likedBy = "\u{2665} \(firstLike.username!)"
             for i in 1..<post!.likes {
                 let user = post!.userLikes[i]
                 do {
@@ -87,11 +87,28 @@ class PostCell: UITableViewCell {
         return dateFormatter.stringFromDate(date)
     }
     
+    func getAttributedCaption() -> NSMutableAttributedString {
+        let username = post!.postedBy
+        
+        let captionText = "\(username): \(post!.caption)"
+        
+        /* Find the position of the search string. Cast to NSString as we want
+         range to be of type NSRange, not Swift's Range<Index> */
+        let range = (captionText as NSString).rangeOfString(username)
+        
+        /* Make the text at the given range bold. Rather than hard-coding a text size,
+         Use the text size configured in Interface Builder. */
+        let attributedCaption = NSMutableAttributedString(string: captionText)
+        attributedCaption.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(self.captionText.font.pointSize), range: range)
+        
+        return attributedCaption
+    }
+    
     func loadUI() {
         if let post = post {
             self.photo.file = post.photo
             self.photo.loadInBackground()
-            self.captionText.text = "\(post.postedBy): \(post.caption)"
+            self.captionText.attributedText = getAttributedCaption()
             self.likes.text = getLikeString()
             if(post.userLiked(PFUser.currentUser()!)) {
                 likeButton.setBackgroundImage(UIImage(named : "filledHeart"), forState: .Normal)
@@ -106,7 +123,7 @@ class PostCell: UITableViewCell {
             } else {
                 self.numComments.setTitle("No comments yet", forState: .Normal)
             }
-            self.timeStamp.text = "Posted " + dateString(post.timestamp)
+            self.timeStamp.text = dateString(post.timestamp).uppercaseString
         }
     }
 

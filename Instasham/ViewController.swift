@@ -33,6 +33,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.estimatedRowHeight = 400.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         self.getPostsFromParse(nil)
         
         let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
@@ -159,6 +163,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let header = tableView.dequeueReusableCellWithIdentifier(HeaderViewIdentifier)! as! HeaderView
         if(section < postArray.count) {
             header.loadUI(postArray[section].user, username: postArray[section].postedBy)
+            header.tag = section
         }
         return header
     }
@@ -175,7 +180,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else if(segue.identifier == "toComments") {
             let nextView = segue.destinationViewController as! CommentViewController
             nextView.post = postArray[sender!.tag]
-
+        } else if(segue.identifier == "toOtherProfile") {
+            let nextView = segue.destinationViewController as! OtherProfileViewController
+            nextView.user = postArray[sender!.view.tag].user
         }
     }
 
