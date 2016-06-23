@@ -16,12 +16,11 @@ The following **required** functionality is complete:
 * [x] User can view the last 20 posts submitted to "Instagram"
 * [x] User can pull to refresh the last 20 posts submitted to "Instagram"
 * [x] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
-* [ ] User can tap a post to view post details, including timestamp and caption.
+* [x] User can tap a post to view post details, including timestamp and caption.
 * [x] User can use a tab bar to switch between all "Instagram" posts and posts published only by the user.
 
 The following **optional** features are implemented:
 * [x] Show the username and creation time for each post
-* [ ] After the user submits a new post, show a progress HUD while the post is being uploaded to Parse
 * [x] Allow the logged in user to add a profile photo
 * [x] Display the profile photo with each post
 * [x] Tapping on a post's username or profile photo goes to that user's profile page
