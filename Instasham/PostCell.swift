@@ -11,11 +11,10 @@ import ParseUI
 
 class PostCell: UITableViewCell {
 
-    
+    @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var makeComment: UIButton!
     @IBOutlet weak var numComments: UIButton!
     @IBOutlet weak var likes: UILabel!
-    @IBOutlet weak var username_box: UILabel!
     @IBOutlet weak var captionText: UILabel!
     @IBOutlet weak var photo: PFImageView!
     @IBOutlet weak var likeButton: UIButton!
@@ -53,37 +52,6 @@ class PostCell: UITableViewCell {
         }
     }
     
-    func getCommentsString() -> String {
-        let numComments = self.post!.comments.count
-        if(numComments == 0) {
-            return ""
-        } else if(numComments > 2) {
-            var commentString = ""
-            for i in 0..<2 {
-                let newUser = self.post!.userComments[i]
-                do {
-                    try newUser.fetchIfNeeded()
-                } catch _ {
-                    return "[Could Not Load Comments]"
-                }
-                commentString += "\n\(newUser.username!) - \(self.post!.comments[i])"
-            }
-            return commentString
-        } else {
-            var commentString = ""
-            for i in 0..<numComments {
-                let newUser = self.post!.userComments[i]
-                do {
-                    try newUser.fetchIfNeeded()
-                } catch _ {
-                    return "[Could Not Load Comments]"
-                }
-                commentString += "\n\(newUser.username!) - \(self.post!.comments[i])"
-            }
-            return commentString
-        }
-    }
-    
     
     func getLikeString() -> String {
         if(post!.likes == 0) {
@@ -95,7 +63,7 @@ class PostCell: UITableViewCell {
             } catch _ {
                 return "\(post!.likes) likes"
             }
-            var likedBy = "<3 \(firstLike.username!)"
+            var likedBy = "\u{2764} \(firstLike.username!)"
             for i in 1..<post!.likes {
                 let user = post!.userLikes[i]
                 do {
@@ -111,26 +79,34 @@ class PostCell: UITableViewCell {
         }
     }
     
+    func dateString(date : NSDate) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .NoStyle
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        return dateFormatter.stringFromDate(date)
+    }
+    
     func loadUI() {
         if let post = post {
             self.photo.file = post.photo
             self.photo.loadInBackground()
             self.captionText.text = "\(post.postedBy): \(post.caption)"
-            self.username_box.text = post.postedBy
             self.likes.text = getLikeString()
             if(post.userLiked(PFUser.currentUser()!)) {
                 likeButton.setBackgroundImage(UIImage(named : "filledHeart"), forState: .Normal)
             } else {
                 likeButton.setBackgroundImage(UIImage(named : "like"), forState: .Normal)
             }
-            if(post.comments.count > 2) {
-                self.numComments.hidden = false
+            let commentCount = post.comments.count
+            if(commentCount > 1) {
                 self.numComments.setTitle("View all \(post.comments.count) comments", forState: .Normal)
+            } else if(commentCount == 1){
+                self.numComments.setTitle("View 1 comment", forState: .Normal)
             } else {
-                self.numComments.hidden = true
+                self.numComments.setTitle("No comments yet", forState: .Normal)
             }
-            self.comments.text = getCommentsString()
-            
+            self.timeStamp.text = "Posted " + dateString(post.timestamp)
         }
     }
 

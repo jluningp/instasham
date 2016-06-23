@@ -8,13 +8,15 @@
 
 import UIKit
 import Parse
+import ParseUI
 import MBProgressHUD
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource {
     
-    
+
+    @IBOutlet weak var profilePic: PFImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     var loadingMoreView:InfiniteScrollActivityView?
     
     var stopIncrementingInfiniteScroll = false
@@ -28,23 +30,42 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
         self.getPostsFromParse(nil)
         
         self.username.text = PFUser.currentUser()!.username
         username.sizeToFit()
         
-        let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+        let frame = CGRectMake(0, collectionView.contentSize.height, collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
         loadingMoreView = InfiniteScrollActivityView(frame: frame)
         loadingMoreView!.hidden = true
-        tableView.addSubview(loadingMoreView!)
+        collectionView.addSubview(loadingMoreView!)
         
-        var insets = tableView.contentInset;
+        var insets = collectionView.contentInset;
         insets.bottom += InfiniteScrollActivityView.defaultHeight;
-        tableView.contentInset = insets
+        collectionView.contentInset = insets
+        
+        loadProfilePic()
+    }
+    
+    func loadProfilePic() {
+        let query = PFQuery(className:"Profile")
+        query.whereKey("user", equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock() {
+            (post, error) -> Void in
+            if error != nil {
+                print("error")
+            } else {
+                if let post = post {
+                    if(post.count != 0) {
+                        self.profilePic.file = post[0]["pic"] as? PFFile
+                        self.profilePic.loadInBackground()
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -81,7 +102,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             if(postCount >= self.queryLimit) {
                 self.stopIncrementingInfiniteScroll = false
             }
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
             if let refreshControl = refreshControl {
                 refreshControl.endRefreshing()
             }
@@ -105,15 +126,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (!stopIncrementingInfiniteScroll) {
             // Calculate the position of one screen length before the bottom of the results
-            let scrollViewContentHeight = tableView.contentSize.height
-            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            let scrollViewContentHeight = collectionView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - collectionView.bounds.size.height
             
             // When the user has scrolled past the threshold, start requesting
-            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && collectionView.dragging) {
                 
                 stopIncrementingInfiniteScroll = true
                 
-                let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+                let frame = CGRectMake(0, collectionView.contentSize.height, collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
                 loadingMoreView?.frame = frame
                 loadingMoreView!.startAnimating()
                 
@@ -124,6 +145,34 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
     }
+    
+    func imageFromLibrary(source : UIImagePickerControllerSourceType) {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        vc.sourceType = source
+        
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        InstaPost.updateProfilePic(editedImage)
+        
+        profilePic.image = editedImage
+
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    @IBAction func newProfilePic(sender: AnyObject) {
+        imageFromLibrary(UIImagePickerControllerSourceType.PhotoLibrary)
+    }
+    
     
     
     func goToLoginScreen() {
@@ -138,15 +187,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return postArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("myPostCell", forIndexPath: indexPath) as! MyPostCell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profileCell", forIndexPath: indexPath) as! ProfileCell
         cell.setPost(postArray[indexPath.row])
-        cell.loadUI()
         cell.tag = indexPath.row
+        cell.loadUI()
         return cell
     }
     

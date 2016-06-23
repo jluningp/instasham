@@ -21,6 +21,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var queryLimitUnit = 20
     var queryLimit = 20
     var sendingFromPost = 0
+    
+    let CellIdentifier = "postCell", HeaderViewIdentifier = "headerCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         var insets = tableView.contentInset;
         insets.bottom += InfiniteScrollActivityView.defaultHeight;
         tableView.contentInset = insets
+        
+        //tableView.registerClass(PostCell.self, forCellReuseIdentifier: CellIdentifier)
+        //tableView.registerClass(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: HeaderViewIdentifier)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -130,24 +136,37 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return postArray.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
-        cell.setPost(postArray[indexPath.row])
+        cell.setPost(postArray[indexPath.section])
         cell.loadUI()
-        cell.tag = indexPath.row
-        cell.numComments.tag = indexPath.row
-        cell.makeComment.tag = indexPath.row
+        cell.tag = indexPath.section
+        cell.numComments.tag = indexPath.section
+        cell.makeComment.tag = indexPath.section
         return cell
     }
-/*
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("toDetails", sender: indexPath.row)
+    
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableCellWithIdentifier(HeaderViewIdentifier)! as! HeaderView
+        if(section < postArray.count) {
+            header.loadUI(postArray[section].user, username: postArray[section].postedBy)
+        }
+        return header
     }
- */
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+ 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "toDetails") {

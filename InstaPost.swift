@@ -39,8 +39,31 @@ class InstaPost {
         post.saveInBackgroundWithBlock(completion)
     }
     
+    class func updateProfilePic(image: UIImage?) {
+        let query = PFQuery(className:"Profile")
+        query.whereKey("user", equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock() {
+            (post, error) -> Void in
+            if error != nil {
+                print("error")
+            } else {
+                if let post = post {
+                    if(post.count == 0) {
+                        let profile = PFObject(className: "Profile")
+                        profile["user"] = PFUser.currentUser()
+                        profile["pic"] = getPFFileFromImage(image)
+                        profile.saveInBackground()
+                    }
+                    let profile = post[0]
+                    profile["pic"] = getPFFileFromImage(image)
+                    profile.saveInBackground()
+                }
+            }
+        }
+    }
 
-    
+
+
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
         // check if image is not nil
         if let image = image {
@@ -57,6 +80,7 @@ class InstaPost {
     var likes : Int
     var timestamp : NSDate
     var postedBy : String
+    var user : PFUser
     var id : String
     var userLikes : [PFUser]
     var comments : [String]
@@ -69,6 +93,7 @@ class InstaPost {
         self.userLikes = userLikes
         self.timestamp = timeStamp!
         self.postedBy = postedBy.username!
+        self.user = postedBy
         self.id = id
         self.comments = comments
         self.userComments = userComments
@@ -132,6 +157,8 @@ class InstaPost {
         }
         
     }
+    
+    
     
     func removeUser(user : PFUser) -> [PFUser] {
         var newLikes = [PFUser]()
