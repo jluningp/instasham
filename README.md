@@ -30,7 +30,9 @@ The following **optional** features are implemented:
 * [x] Run your app on your phone and use the camera to take the photo
 
 The following **additional** features are implemented:
-- [x] 
+- [x] User can view own posts on profile as a collection view
+- [x] User can see number of posts they have made on profile
+- [x] User interface is prettier (imitation Instagram)
 
 ## Video Walkthrough
 
