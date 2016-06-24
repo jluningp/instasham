@@ -13,7 +13,9 @@ import ParseUI
 
 class OtherProfileViewController: UIViewController, UICollectionViewDataSource {
     
-    
+    @IBOutlet weak var followingNumber: UILabel!
+    @IBOutlet weak var followerNumber: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var postNumber: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var postArray = [InstaPost]()
@@ -29,7 +31,14 @@ class OtherProfileViewController: UIViewController, UICollectionViewDataSource {
         super.viewDidLoad()
         collectionView.dataSource = self
         
-        self.topUsername.text = user!.username!
+        if let user = user {
+            do {
+                try user.fetchIfNeeded()
+            } catch _ {
+                self.topUsername.text = "[Failed to load username]"
+            }
+            self.topUsername.text = user.username!
+        }
         
         self.collectionView.dataSource = self
         
@@ -50,7 +59,35 @@ class OtherProfileViewController: UIViewController, UICollectionViewDataSource {
         loadProfilePic()
         
         getPostsFromParse(refreshControl)
+        if let user = user {
+            if InstaPost.followingUser(user) {
+                followButton.setTitle("Unfollow", forState: .Normal)
+            } else {
+                followButton.setTitle("Follow", forState: .Normal)
+            }
+        }
+        updateUserFollow()
     }
+    
+    func updateUserFollow() {
+        if let user = user {
+            //self.followerNumber.text = "\((user["followers"] as! [PFUser]).count)"
+            self.followingNumber.text = "\((user["following"] as! [PFUser]).count)"
+        }
+    }
+    
+    @IBAction func followUser(sender: AnyObject) {
+        if let user = user {
+            if InstaPost.followingUser(user) {
+                self.followButton.setTitle("Follow", forState: .Normal)
+            } else {
+                self.followButton.setTitle("Unfollow", forState: .Normal)
+            }
+            updateUserFollow()
+            InstaPost.updateFollowing(user)
+        }
+    }
+    
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
         self.queryLimit = self.queryLimitUnit

@@ -13,6 +13,10 @@ import MBProgressHUD
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource {
     
+    @IBOutlet weak var followingNumber: UILabel!
+    @IBOutlet weak var followersNumber: UILabel!
+    
+    
     @IBOutlet weak var postNumber: UILabel!
     @IBOutlet weak var profilePic: PFImageView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -48,6 +52,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         collectionView.contentInset = insets
         
         loadProfilePic()
+        updateUserFollow()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        updateUserFollow()
     }
     
     func circleProfile() {
@@ -58,9 +67,37 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func loadProfilePic() {
         circleProfile()
-        print(PFUser.currentUser())
         self.profilePic.file = PFUser.currentUser()!["profile"] as? PFFile
         self.profilePic.loadInBackground()
+    }
+    
+    func updateUserFollow() {
+        if let user = PFUser.currentUser() {
+            self.followingNumber.text = "\((user["following"] as! [PFUser]).count)"
+            getFollowerNumber(user)
+        }
+    }
+    
+    func getFollowerNumber(currentUser : PFUser) {
+        var followerNumber = 0
+        let query = PFQuery(className:"_User")
+        query.findObjectsInBackgroundWithBlock() {
+            (users, error) -> Void in
+            if error != nil {
+                print(error)
+            } else {
+                if let users = users {
+                    let userList = users as! [PFUser]
+                    for user in userList {
+                        if(InstaPost.followingOtherUser(user, user: currentUser)) {
+                            followerNumber += 1
+                        }
+                    }
+                    self.followersNumber.text = "\(followerNumber)"
+                }
+            }
+        }
+
     }
     
     override func viewDidAppear(animated: Bool) {

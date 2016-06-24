@@ -12,9 +12,19 @@ import MBProgressHUD
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
-   
+    @IBOutlet weak var topBarAll: UILabel!
+    @IBOutlet weak var topBar: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    //To show with no posts
+    @IBOutlet weak var noPosts: UILabel!
+    @IBOutlet weak var noPostsInstasham: UILabel!
+    @IBOutlet weak var noPostsLine: UILabel!
+    
     var loadingMoreView:InfiniteScrollActivityView?
+    
+    var onlyFollowing = true
+    var filteredPosts = [InstaPost]()
     
     var stopIncrementingInfiniteScroll = false
     var postArray = [InstaPost]()
@@ -26,31 +36,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if PFUser.currentUser() != nil {
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            tableView.insertSubview(refreshControl, atIndex: 0)
+            
+            tableView.dataSource = self
+            tableView.delegate = self
+            
+            tableView.estimatedRowHeight = 400.0
+            tableView.rowHeight = UITableViewAutomaticDimension
+            
+            self.getPostsFromParse(nil)
+            
+            let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+            loadingMoreView = InfiniteScrollActivityView(frame: frame)
+            loadingMoreView!.hidden = true
+            tableView.addSubview(loadingMoreView!)
+            
+            var insets = tableView.contentInset;
+            insets.bottom += InfiniteScrollActivityView.defaultHeight;
+            tableView.contentInset = insets
+        } else {
+            logout()
+        }
         
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.estimatedRowHeight = 400.0
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
-        self.getPostsFromParse(nil)
-        
-        let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
-        loadingMoreView = InfiniteScrollActivityView(frame: frame)
-        loadingMoreView!.hidden = true
-        tableView.addSubview(loadingMoreView!)
-        
-        var insets = tableView.contentInset;
-        insets.bottom += InfiniteScrollActivityView.defaultHeight;
-        tableView.contentInset = insets
-        
-        //tableView.registerClass(PostCell.self, forCellReuseIdentifier: CellIdentifier)
-        //tableView.registerClass(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: HeaderViewIdentifier)
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if(self.navigationController != nil) {
+            self.navigationController!.navigationBar.hidden = true
+            topBarAll.hidden = false
+            topBar.hidden = true
+        } else {
+            topBarAll.hidden = true
+            topBar.hidden = false
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -77,11 +98,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let posts = posts {
                 postCount = posts.count
                 self.postArray.removeAll()
+                self.filteredPosts.removeAll()
                 for i in 0..<postCount {
-                    self.postArray.append(InstaPost(photo: posts[i]["media"] as! PFFile, caption: posts[i]["caption"] as! String, postedBy: posts[i]["author"] as! PFUser, timeStamp: posts[i].createdAt, id: posts[i].objectId!, likes: posts[i]["likesCount"] as! Int, userLikes: posts[i]["likes"] as! [PFUser], comments: posts[i]["comments"] as! [String], userComments: posts[i]["userComments"] as! [PFUser]))
+                    let nextPost = InstaPost(photo: posts[i]["media"] as! PFFile, caption: posts[i]["caption"] as! String, postedBy: posts[i]["author"] as! PFUser, timeStamp: posts[i].createdAt, id: posts[i].objectId!, likes: posts[i]["likesCount"] as! Int, userLikes: posts[i]["likes"] as! [PFUser], comments: posts[i]["comments"] as! [String], userComments: posts[i]["userComments"] as! [PFUser])
+                    self.postArray.append(nextPost)
+                    if(InstaPost.followingUser(nextPost.user)) {
+                        print("following: \(nextPost.user.username!)")
+                        self.filteredPosts.append(nextPost)
+                    }
                 }
             } else {
                 print("Nothing was Sent from Server")
+            }
+            if(self.onlyFollowing) {
+                postCount = self.filteredPosts.count
             }
             if(postCount >= self.queryLimit) {
                 self.stopIncrementingInfiniteScroll = false
@@ -141,7 +171,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return postArray.count
+        if(self.onlyFollowing) {
+            if(filteredPosts.count == 0) {
+                tableView.hidden = true
+                noPosts.hidden = false
+                noPostsLine.hidden = false
+                noPostsInstasham.hidden = false
+            } else {
+                tableView.hidden = false
+                noPosts.hidden = true
+                noPostsLine.hidden = true
+                noPostsInstasham.hidden = true
+            }
+            return filteredPosts.count
+        } else {
+            return postArray.count
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,8 +194,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var posts = postArray
+        if(self.onlyFollowing) {
+            posts = filteredPosts
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! PostCell
-        cell.setPost(postArray[indexPath.section])
+        
+        cell.setPost(posts[indexPath.section])
+        print(posts[indexPath.section])
         cell.loadUI()
         cell.tag = indexPath.section
         cell.numComments.tag = indexPath.section
@@ -161,15 +212,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableCellWithIdentifier(HeaderViewIdentifier)! as! HeaderView
-        if(section < postArray.count) {
-            header.loadUI(postArray[section].user, username: postArray[section].postedBy)
+        var posts = postArray
+        if(self.onlyFollowing) {
+            posts = filteredPosts
+        }
+        if(section < posts.count) {
+            header.loadUI(posts[section].user, username: posts[section].postedBy)
             header.tag = section
         }
         return header
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 44
     }
  
     
