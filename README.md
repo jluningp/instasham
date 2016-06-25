@@ -45,6 +45,7 @@ Here's a walkthrough of implemented user stories:
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/V5gTqGc23P0" frameborder="0" allowfullscreen></iframe>
 
+<a href="https://www.youtube.com/embed/V5gTqGc23P0">Link to video</a>
 
 Video created with QuickTime Player
 
