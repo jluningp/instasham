@@ -25,9 +25,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     var stopIncrementingInfiniteScroll = false
     var postArray = [InstaPost]()
-    var queryLimitUnit = 3
-    var queryLimit = 3
-    var sendingFromPost = 0
+    var queryLimitUnit = 20
+    var queryLimit = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +72,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func updateUserFollow() {
         if let user = PFUser.currentUser() {
-            self.followingNumber.text = "\((user["following"] as! [PFUser]).count)"
+            self.followingNumber.text = "\((user["following"] as! [PFUser]).count - 1)"
             getFollowerNumber(user)
         }
     }
@@ -93,7 +92,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                             followerNumber += 1
                         }
                     }
-                    self.followersNumber.text = "\(followerNumber)"
+                    self.followersNumber.text = "\(followerNumber - 1)"
                 }
             }
         }

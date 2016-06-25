@@ -39,6 +39,7 @@ class NotifCell: UITableViewCell {
         }
         return user.username! as String
     }
+
     
     func loadUI() {
         self.notifText.attributedText = getAttributedCaption(getUsername(self.notif!.doneBy), notifString: self.notif!.printNotification())
@@ -53,7 +54,13 @@ class NotifCell: UITableViewCell {
     
     func loadProfilePic() {
         circleProfile()
-        self.profileImage.file = self.notif!.doneBy["profile"] as? PFFile
+        let user = self.notif!.doneBy
+        do {
+            try user.fetchIfNeeded()
+        } catch _ {
+            
+        }
+        self.profileImage.file = user["profile"] as? PFFile
         self.profileImage.loadInBackground()
     }
     

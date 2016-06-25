@@ -18,6 +18,7 @@ class NotifViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -55,7 +56,9 @@ class NotifViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.myNotifs.removeAll()
                 for i in 0..<postCount {
                     let nextNotif = Notification(toNotify: posts[i]["toNotify"] as! PFUser, doneBy: posts[i]["doneBy"] as! PFUser, action: posts[i]["action"] as! String, doneTo: posts[i]["doneTo"] as! String)
-                    self.myNotifs.append(nextNotif)
+                    if(self.getUserName(nextNotif.toNotify) == self.getUserName(PFUser.currentUser()!)) {
+                        self.myNotifs.append(nextNotif)
+                    }
                 }
             } else {
                 print("Nothing was Sent from Server")
@@ -63,6 +66,15 @@ class NotifViewController: UIViewController, UITableViewDelegate, UITableViewDat
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             self.tableView.reloadData()
         }
+    }
+    
+    func getUserName(user : PFUser) -> String {
+        do {
+            try user.fetchIfNeeded()
+        } catch _ {
+            return ""
+        }
+        return user.username! as String
     }
 
     

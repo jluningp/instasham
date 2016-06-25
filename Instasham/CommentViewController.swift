@@ -26,8 +26,11 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     @IBAction func postComment(sender: AnyObject) {
         let comment = commentEntry.text ?? ""
-        post!.updateComments(Comment(user: PFUser.currentUser()!, comment: comment))
-        tableView.reloadData()
+        if(commentEntry.text != "") {
+            post!.updateComments(Comment(user: PFUser.currentUser()!, comment: comment))
+            commentEntry.text = ""
+            tableView.reloadData()
+        }
     }
     
     @IBAction func cancel(sender: AnyObject) {

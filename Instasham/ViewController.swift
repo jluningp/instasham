@@ -36,6 +36,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if PFUser.currentUser() != nil {
             let refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -219,6 +220,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if(section < posts.count) {
             header.loadUI(posts[section].user, username: posts[section].postedBy)
             header.tag = section
+            header.userName.tag = section
         }
         return header
     }
@@ -238,6 +240,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else if(segue.identifier == "toOtherProfile") {
             let nextView = segue.destinationViewController as! OtherProfileViewController
             nextView.user = postArray[sender!.view.tag].user
+        } else if(segue.identifier == "toOtherProfileButton") {
+            let nextView = segue.destinationViewController as! OtherProfileViewController
+            nextView.user = postArray[sender!.tag].user
         }
     }
 

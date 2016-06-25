@@ -200,12 +200,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2F-De-B5k">
-                                                    <rect key="frame" x="49" y="11" width="289" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pd-08-KJe">
+                                                    <rect key="frame" x="49" y="7" width="279" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="Q3k-1k-wDe" kind="presentation" identifier="toOtherProfileButton" id="dSA-3F-5Ty"/>
+                                                    </connections>
+                                                </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotdot" translatesAutoresizingMaskIntoConstraints="NO" id="zld-v5-enD">
                                                     <rect key="frame" x="336" y="9" width="24" height="28"/>
                                                 </imageView>
@@ -217,7 +221,7 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="headerImage" destination="kh7-La-gIy" id="Xgi-zo-zFm"/>
-                                            <outlet property="userName" destination="O2F-De-B5k" id="XWB-3U-BWd"/>
+                                            <outlet property="userName" destination="7pd-08-KJe" id="zDd-D5-HaY"/>
                                             <outletCollection property="gestureRecognizers" destination="H5T-mq-zN6" appends="YES" id="YpG-pC-l1X"/>
                                         </connections>
                                     </tableViewCell>
@@ -359,12 +363,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Luc-bf-gmU">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="Luc-bf-gmU">
                     <connections>
                         <action selector="postImage:" destination="BYZ-38-t0r" id="RKl-IJ-FDc"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="H5T-mq-zN6">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="H5T-mq-zN6">
                     <connections>
                         <segue destination="Q3k-1k-wDe" kind="presentation" identifier="toOtherProfile" modalPresentationStyle="pageSheet" id="cKt-GL-vnc"/>
                     </connections>
@@ -969,26 +973,43 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rB-ae-rJg">
                                                     <rect key="frame" x="74" y="8" width="293" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="293" id="k8T-mA-u9A"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvH-5y-P6i">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvH-5y-P6i">
                                                     <rect key="frame" x="74" y="30" width="293" height="31.5"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="293" id="Tgp-ne-0ax"/>
                                                         <constraint firstAttribute="width" constant="293" id="ngW-Fj-D3g"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R1q-90-ixT" customClass="PFImageView">
-                                                    <rect key="frame" x="13" y="12" width="45" height="45"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R1q-90-ixT" customClass="PFImageView">
+                                                    <rect key="frame" x="20" y="12" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="5CZ-sR-xJM"/>
+                                                        <constraint firstAttribute="width" constant="36" id="i3X-6X-F2v"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="EvH-5y-P6i" firstAttribute="top" secondItem="9rB-ae-rJg" secondAttribute="bottom" constant="1" id="0tr-C0-k1G"/>
+                                                <constraint firstItem="9rB-ae-rJg" firstAttribute="trailing" secondItem="Osc-Q6-cj8" secondAttribute="trailingMargin" id="2Fh-yd-fu3"/>
                                                 <constraint firstItem="EvH-5y-P6i" firstAttribute="trailing" secondItem="Osc-Q6-cj8" secondAttribute="trailingMargin" id="523-cx-7Hd"/>
+                                                <constraint firstItem="R1q-90-ixT" firstAttribute="leading" secondItem="Osc-Q6-cj8" secondAttribute="leading" constant="20" id="8ll-gf-Hnb"/>
+                                                <constraint firstItem="9rB-ae-rJg" firstAttribute="top" secondItem="Osc-Q6-cj8" secondAttribute="topMargin" id="Eky-WZ-s8u"/>
+                                                <constraint firstItem="9rB-ae-rJg" firstAttribute="leading" secondItem="R1q-90-ixT" secondAttribute="trailing" constant="18" id="FaH-tb-2gF"/>
+                                                <constraint firstItem="EvH-5y-P6i" firstAttribute="leading" secondItem="R1q-90-ixT" secondAttribute="trailing" constant="18" id="Mjx-mY-Xhm"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="EvH-5y-P6i" secondAttribute="bottom" constant="1" id="O2I-RK-o4i"/>
+                                                <constraint firstItem="EvH-5y-P6i" firstAttribute="trailing" secondItem="Osc-Q6-cj8" secondAttribute="trailingMargin" id="aRD-q4-o28"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="EvH-5y-P6i" secondAttribute="bottom" constant="1" id="cUm-Jm-uFA"/>
+                                                <constraint firstItem="EvH-5y-P6i" firstAttribute="top" secondItem="9rB-ae-rJg" secondAttribute="bottom" constant="1" id="hAv-NO-bFE"/>
                                                 <constraint firstItem="EvH-5y-P6i" firstAttribute="top" secondItem="9rB-ae-rJg" secondAttribute="bottom" constant="1" id="mRz-bs-dyf"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1105,6 +1126,7 @@
         <image name="share" width="132" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="dSA-3F-5Ty"/>
         <segue reference="Jjf-3z-9fD"/>
         <segue reference="rMB-QE-qj1"/>
     </inferredMetricsTieBreakers>

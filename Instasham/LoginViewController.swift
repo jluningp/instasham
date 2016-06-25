@@ -76,6 +76,11 @@ class LoginViewController: UIViewController {
             }
         }
         
+        var following = newUser["following"] as! [PFUser]
+        following.append(newUser)
+        newUser["following"] = following
+        newUser.saveInBackground()
+        
     }
     
     
