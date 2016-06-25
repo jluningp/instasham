@@ -4,7 +4,7 @@ Instasham is an imitation Instagram app.
 
 Submitted by: Jeanne Luning Prak
 
-Time spent: 25 hours spent in total
+Time spent: 40 hours spent in total
 
 ## User Stories
 
@@ -31,21 +31,28 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 - [x] User can view own posts on profile as a collection view
 - [x] User can see number of posts they have made on profile
+- [x] User can follow other users and see only the users they follow on their home screen
+- [x] User can view all posts on another screen
+- [x] User can choose from a variety of filters to add to picture they post using swipe gestures
+- [x] User can see how many people are following them and how many people they are following on their profile
+- [x] No posts here! screen is displayed if there are no posts to view
+- [x] User can view notifications when their posts are liked or commented on and when users follow them
 - [x] User interface is prettier (imitation Instagram)
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<iframe width="420" height="315" src="https://www.youtube.com/embed/V5gTqGc23P0" frameborder="0" allowfullscreen></iframe>
 
 
-GIFs created with [LiceCap](http://www.cockos.com/licecap/).
+Video created with QuickTime Player
 
 ## Notes
 
 ## Questions
-1. 
+1. How do I use double tap gestures?
+2. How can I use push without losing tab bar?
 
 ## Credits
 
