@@ -12,8 +12,7 @@ import ParseUI
 class HeaderView: UITableViewCell {
     
     @IBOutlet weak var headerImage: PFImageView!
-    @IBOutlet weak var userName: UILabel!
-
+    @IBOutlet weak var userName: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,7 +26,7 @@ class HeaderView: UITableViewCell {
     
     func loadUI(postedBy : PFUser, username : String) {
         circleHeader()
-        self.userName.text = username
+        self.userName.setTitle(username, forState: .Normal)
         if let profile = postedBy["profile"] {
             self.headerImage.file = profile as? PFFile
             self.headerImage.loadInBackground()

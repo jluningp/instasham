@@ -44,6 +44,46 @@ class InstaPost {
         user!["profile"] = getPFFileFromImage(image)
         user!.saveInBackground()
     }
+    
+    class func removeFromList(user : PFUser, userList : [PFUser]) -> [PFUser] {
+        do {
+            try user.fetchIfNeeded()
+        } catch _ {
+            return userList
+        }
+        var newUsers = [PFUser]()
+        for nextUser in userList {
+            do {
+                try nextUser.fetchIfNeeded()
+            } catch _ {
+                return userList
+            }
+            if(nextUser.username != user.username) {
+                newUsers.append(nextUser)
+            }
+        }
+        return newUsers
+    }
+    
+    class func updateFollowing(user : PFUser) {
+        let currentUser = PFUser.currentUser()
+        var following = currentUser!["following"] as! [PFUser]
+        if(!InstaPost.followingUser(user)) {
+            following.append(user)
+            PFUser.currentUser()!["following"] = following
+            PFUser.currentUser()!.saveInBackgroundWithBlock() {
+                (post, error) -> Void in
+                if error != nil {
+                    print(error)
+                }
+            }
+            let notif = Notification(toNotify: user, doneBy: currentUser!, action: "followed", doneTo: "you")
+            notif.recordNotification()
+        } else {
+            currentUser!["following"] = removeFromList(user, userList: following)
+            currentUser!.saveInBackground()
+        }
+    }
 
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
         // check if image is not nil
@@ -55,6 +95,35 @@ class InstaPost {
         }
         return nil
     }
+    
+    class func followingUser(user : PFUser) -> Bool {
+        return followingOtherUser(PFUser.currentUser()!, user: user)
+    }
+    
+    class func followingOtherUser(currentUser : PFUser, user : PFUser) -> Bool {
+        let me : PFUser = currentUser
+        do {
+            try me.fetchIfNeeded()
+        } catch _ {
+            return false
+        }
+        if let following = me["following"] {
+            for nextUser in following as! [PFUser] {
+                do {
+                    try nextUser.fetchIfNeeded()
+                } catch _ {
+                    return false
+                }
+                print(user.username!)
+                print(nextUser.username!)
+                if user.username! == nextUser.username! {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     
     var photo : PFFile
     var caption : String
@@ -100,6 +169,8 @@ class InstaPost {
                         print(error)
                     }
                 }
+                let notif = Notification(toNotify: self.user, doneBy: comment.user, action: "commented on", doneTo: "your post")
+                notif.recordNotification()
             }
         }
     }
@@ -133,6 +204,8 @@ class InstaPost {
                     newLikes.append(user)
                     post!["likes"] = newLikes
                     post!.saveInBackground()
+                    let notif = Notification(toNotify: self.user, doneBy: user, action: "liked", doneTo: "your post")
+                    notif.recordNotification()
                 }
             }
         }

@@ -12,6 +12,12 @@
 		DD1DABCF1D199819001A3CA1 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DABCE1D199819001A3CA1 /* InfiniteScrollActivityView.swift */; };
 		DD4796BF1D19A8C7006F7608 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */; };
 		DD720F6B1D19E79600035596 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD720F6A1D19E79600035596 /* ProfileViewController.swift */; };
+		DD85F1EB1D1D859F00FF4B1E /* AllPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85F1EA1D1D859F00FF4B1E /* AllPostsViewController.swift */; };
+		DD85F1EF1D1D94C400FF4B1E /* iconmonstr-favorite-4-24.png in Resources */ = {isa = PBXBuildFile; fileRef = DD85F1EE1D1D94C400FF4B1E /* iconmonstr-favorite-4-24.png */; };
+		DD85F1F11D1D950A00FF4B1E /* iconmonstr-magnifier-2-24.png in Resources */ = {isa = PBXBuildFile; fileRef = DD85F1F01D1D950A00FF4B1E /* iconmonstr-magnifier-2-24.png */; };
+		DD85F1F51D1DA80C00FF4B1E /* NotifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85F1F41D1DA80C00FF4B1E /* NotifViewController.swift */; };
+		DD85F1F71D1DA8CA00FF4B1E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85F1F61D1DA8CA00FF4B1E /* Notification.swift */; };
+		DD85F1F91D1DDB7800FF4B1E /* NotifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD85F1F81D1DDB7800FF4B1E /* NotifCell.swift */; };
 		DD8D70051D186394003EA9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70041D186394003EA9C4 /* AppDelegate.swift */; };
 		DD8D70071D186394003EA9C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D70061D186394003EA9C4 /* ViewController.swift */; };
 		DD8D700A1D186394003EA9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D70081D186394003EA9C4 /* Main.storyboard */; };
@@ -35,6 +41,12 @@
 		DD1DABCE1D199819001A3CA1 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfiniteScrollActivityView.swift; path = ../Pods/InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
 		DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		DD720F6A1D19E79600035596 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DD85F1EA1D1D859F00FF4B1E /* AllPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPostsViewController.swift; sourceTree = "<group>"; };
+		DD85F1EE1D1D94C400FF4B1E /* iconmonstr-favorite-4-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconmonstr-favorite-4-24.png"; path = "../../../Downloads/iconmonstr-favorite-4-24.png"; sourceTree = "<group>"; };
+		DD85F1F01D1D950A00FF4B1E /* iconmonstr-magnifier-2-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconmonstr-magnifier-2-24.png"; path = "../../../Downloads/iconmonstr-magnifier-2-24.png"; sourceTree = "<group>"; };
+		DD85F1F41D1DA80C00FF4B1E /* NotifViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifViewController.swift; sourceTree = "<group>"; };
+		DD85F1F61D1DA8CA00FF4B1E /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = ../Notification.swift; sourceTree = "<group>"; };
+		DD85F1F81D1DDB7800FF4B1E /* NotifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifCell.swift; sourceTree = "<group>"; };
 		DD8D70011D186394003EA9C4 /* Instasham.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instasham.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8D70041D186394003EA9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD8D70061D186394003EA9C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,8 +117,13 @@
 				DD8D70211D18682A003EA9C4 /* ViewControllers */,
 				DD8D70201D18681C003EA9C4 /* Views */,
 				DD8D70041D186394003EA9C4 /* AppDelegate.swift */,
+				DD85F1F61D1DA8CA00FF4B1E /* Notification.swift */,
 				DD8D701E1D186762003EA9C4 /* InstaPost.swift */,
 				DD8D70081D186394003EA9C4 /* Main.storyboard */,
+				DD85F1F41D1DA80C00FF4B1E /* NotifViewController.swift */,
+				DD85F1F81D1DDB7800FF4B1E /* NotifCell.swift */,
+				DD85F1F01D1D950A00FF4B1E /* iconmonstr-magnifier-2-24.png */,
+				DD85F1EE1D1D94C400FF4B1E /* iconmonstr-favorite-4-24.png */,
 				DD8D700B1D186394003EA9C4 /* Assets.xcassets */,
 				DD8D700D1D186394003EA9C4 /* LaunchScreen.storyboard */,
 				DD8D70101D186394003EA9C4 /* Info.plist */,
@@ -134,6 +151,7 @@
 				DD8D70241D189238003EA9C4 /* LoginViewController.swift */,
 				DD4796BE1D19A8C7006F7608 /* DetailsViewController.swift */,
 				DD8D70261D18A7F2003EA9C4 /* PostViewController.swift */,
+				DD85F1EA1D1D859F00FF4B1E /* AllPostsViewController.swift */,
 				DD720F6A1D19E79600035596 /* ProfileViewController.swift */,
 				DDDC006B1D1C34BE0096241B /* OtherProfileViewController.swift */,
 			);
@@ -202,9 +220,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD85F1EF1D1D94C400FF4B1E /* iconmonstr-favorite-4-24.png in Resources */,
 				DD8D700F1D186394003EA9C4 /* LaunchScreen.storyboard in Resources */,
 				DD8D700C1D186394003EA9C4 /* Assets.xcassets in Resources */,
 				DD8D700A1D186394003EA9C4 /* Main.storyboard in Resources */,
+				DD85F1F11D1D950A00FF4B1E /* iconmonstr-magnifier-2-24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,12 +291,16 @@
 				DD8D70071D186394003EA9C4 /* ViewController.swift in Sources */,
 				DD8D70051D186394003EA9C4 /* AppDelegate.swift in Sources */,
 				DD720F6B1D19E79600035596 /* ProfileViewController.swift in Sources */,
+				DD85F1F51D1DA80C00FF4B1E /* NotifViewController.swift in Sources */,
 				DD8D70251D189238003EA9C4 /* LoginViewController.swift in Sources */,
+				DD85F1EB1D1D859F00FF4B1E /* AllPostsViewController.swift in Sources */,
 				DD8D701F1D186762003EA9C4 /* InstaPost.swift in Sources */,
+				DD85F1F91D1DDB7800FF4B1E /* NotifCell.swift in Sources */,
 				DDDC00601D1B33570096241B /* ProfileCell.swift in Sources */,
 				DDDC00581D1AFAAF0096241B /* CommentViewController.swift in Sources */,
 				DDDC005A1D1B03CB0096241B /* CommentCell.swift in Sources */,
 				DDDC00641D1B47B70096241B /* HeaderView.swift in Sources */,
+				DD85F1F71D1DA8CA00FF4B1E /* Notification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
